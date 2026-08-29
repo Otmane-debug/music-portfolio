@@ -20,9 +20,13 @@ export default function LoginPage() {
       </p>
 
       {status === "sent" ? (
-        <p className="text-sm">
-          Vérifie ta boîte mail ({email}) et clique sur le lien reçu.
-        </p>
+        <div className="space-y-2 text-sm">
+          <p>Vérifie ta boîte mail ({email}) et clique sur le lien reçu.</p>
+          <p className="text-foreground-dim">
+            Si tu ne le vois pas d&apos;ici quelques minutes, pense à
+            vérifier ton dossier spam / courrier indésirable.
+          </p>
+        </div>
       ) : (
         <form
           className="flex flex-col gap-3"
