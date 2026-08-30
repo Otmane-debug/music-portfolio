@@ -37,7 +37,7 @@ export default function BioSection() {
       </ul>
 
       <a
-        href="mailto:otmanesd9@outlook.fr"
+        href="mailto:viiisailor82@gmail.com"
         className="inline-flex items-center gap-1.5 rounded-full border border-accent px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"
       >
         Contact me
