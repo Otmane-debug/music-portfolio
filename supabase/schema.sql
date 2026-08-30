@@ -8,6 +8,7 @@ create table if not exists public.tracks (
   preview_path text not null,   -- path inside the public "tracks-public" bucket (streaming)
   download_path text not null,  -- path inside the private "tracks-private" bucket (auth required)
   purchase_link text,     -- external checkout URL (Stripe Payment Link, Gumroad, etc.)
+  stripe_price_id text,   -- Stripe Price ID (price_...) used to verify payment server-side
   created_at timestamptz not null default now()
 );
 
