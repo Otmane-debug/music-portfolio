@@ -7,6 +7,7 @@ export type Track = {
   download_path: string;
   purchase_link: string | null;
   stripe_price_id: string | null;
+  stripe_product_id: string | null;
   created_at: string;
 };
 

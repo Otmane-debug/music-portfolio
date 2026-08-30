@@ -17,11 +17,11 @@ export async function GET(
   const supabase = await createClient();
   const { data: track, error: trackError } = await supabase
     .from("tracks")
-    .select("title, download_path, stripe_price_id")
+    .select("title, download_path, stripe_product_id")
     .eq("id", trackId)
     .single();
 
-  if (trackError || !track || !track.stripe_price_id) {
+  if (trackError || !track || !track.stripe_product_id) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
@@ -30,19 +30,15 @@ export async function GET(
     expand: ["line_items"],
   });
 
+  // Compared by product, not price: "customer chooses the amount" prices
+  // mint a fresh Price id on every checkout, but stay on the same Product.
   const paidForThisTrack =
     session.payment_status === "paid" &&
     session.line_items?.data.some(
-      (item) => item.price?.id === track.stripe_price_id,
+      (item) => item.price?.product === track.stripe_product_id,
     );
 
   if (!paidForThisTrack) {
-    console.error("DEBUG purchase verification failed", {
-      trackId,
-      expectedPriceId: track.stripe_price_id,
-      paymentStatus: session.payment_status,
-      lineItemPriceIds: session.line_items?.data.map((item) => item.price?.id),
-    });
     return NextResponse.json(
       { error: "Payment not verified for this track" },
       { status: 403 },
