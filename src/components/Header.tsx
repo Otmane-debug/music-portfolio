@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
+import Logo from "@/components/Logo";
 
 export default async function Header() {
   const supabase = await createClient();
@@ -11,12 +12,15 @@ export default async function Header() {
   return (
     <header className="border-b border-border">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
-        <Link href="/" className="group flex flex-col leading-none">
-          <span className="font-display text-lg font-bold tracking-tight">
-            Mon univers musical
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground-dim transition group-hover:text-accent">
-            guitare · électroacoustique · ableton
+        <Link href="/" className="group flex items-center gap-3">
+          <Logo className="h-8 w-8 shrink-0 text-accent" />
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-lg font-bold tracking-tight">
+              Otmanes Music
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground-dim transition group-hover:text-accent">
+              guitare · électroacoustique · ableton
+            </span>
           </span>
         </Link>
         <nav className="flex items-center gap-4">

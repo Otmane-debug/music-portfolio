@@ -17,7 +17,7 @@ const monoFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mon univers musical",
+  title: "Otmanes Music",
   description:
     "Guitare électrique, électroacoustique et composition Ableton — écoute et téléchargement.",
 };

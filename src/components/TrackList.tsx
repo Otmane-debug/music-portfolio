@@ -36,5 +36,14 @@ export default async function TrackList() {
     };
   });
 
-  return <TrackRows tracks={rows} isLoggedIn={isLoggedIn} />;
+  return (
+    <div className="space-y-4">
+      {!isLoggedIn && (
+        <p className="font-mono text-xs uppercase tracking-wide text-foreground-dim">
+          Connecte-toi pour télécharger les morceaux.
+        </p>
+      )}
+      <TrackRows tracks={rows} isLoggedIn={isLoggedIn} />
+    </div>
+  );
 }

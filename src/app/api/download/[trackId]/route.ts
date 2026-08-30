@@ -19,7 +19,7 @@ export async function GET(
 
   const { data: track, error: trackError } = await supabase
     .from("tracks")
-    .select("download_path")
+    .select("title, download_path")
     .eq("id", trackId)
     .single();
 
@@ -27,10 +27,13 @@ export async function GET(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
+  const extension = track.download_path.split(".").pop();
+  const filename = `${track.title}.${extension}`;
+
   const admin = createAdminClient();
   const { data, error } = await admin.storage
     .from("tracks-private")
-    .createSignedUrl(track.download_path, 60);
+    .createSignedUrl(track.download_path, 60, { download: filename });
 
   if (error || !data) {
     return NextResponse.json({ error: "Storage error" }, { status: 500 });
