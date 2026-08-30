@@ -79,6 +79,10 @@ export async function GET(
     .createSignedUrl(track.download_path, 300, { download: filename });
 
   if (error || !data) {
+    console.error("DEBUG storage error", {
+      downloadPath: track.download_path,
+      error,
+    });
     return NextResponse.json({ error: "Storage error" }, { status: 500 });
   }
 
