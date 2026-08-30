@@ -7,6 +7,7 @@ create table if not exists public.tracks (
   cover_path text,        -- path inside the public "covers" bucket
   preview_path text not null,   -- path inside the public "tracks-public" bucket (streaming)
   download_path text not null,  -- path inside the private "tracks-private" bucket (auth required)
+  purchase_link text,     -- external checkout URL (Stripe Payment Link, Gumroad, etc.)
   created_at timestamptz not null default now()
 );
 

@@ -11,6 +11,7 @@ type Row = {
   title: string;
   description: string | null;
   url: string;
+  purchaseLink: string | null;
 };
 
 export default function TrackRows({
@@ -71,6 +72,17 @@ export default function TrackRows({
             </div>
 
             {isCurrentlyPlaying && <EqBars />}
+
+            {track.purchaseLink && (
+              <a
+                href={track.purchaseLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 rounded-full border border-accent px-3 py-1 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"
+              >
+                Buy
+              </a>
+            )}
 
             <DownloadButton trackId={track.id} isLoggedIn={isLoggedIn} />
           </li>

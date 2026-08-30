@@ -33,6 +33,7 @@ export default async function TrackList() {
       title: track.title,
       description: track.description,
       url: preview.publicUrl,
+      purchaseLink: track.purchase_link,
     };
   });
 

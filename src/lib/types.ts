@@ -5,5 +5,6 @@ export type Track = {
   cover_path: string | null;
   preview_path: string;
   download_path: string;
+  purchase_link: string | null;
   created_at: string;
 };
