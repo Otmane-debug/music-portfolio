@@ -17,19 +17,12 @@ export default async function AccountPage() {
     .select("id, track_id, created_at, tracks (title)")
     .order("created_at", { ascending: false });
 
-  const firstName = user.user_metadata?.first_name as string | undefined;
-  const lastName = user.user_metadata?.last_name as string | undefined;
-  const fullName = [firstName, lastName].filter(Boolean).join(" ");
-
   return (
     <div className="py-14">
       <p className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-accent">
         Your account
       </p>
-      <h1 className="mb-1 font-display text-2xl font-bold">
-        {fullName || user.email}
-      </h1>
-      <p className="mb-10 text-sm text-foreground-dim">{user.email}</p>
+      <h1 className="mb-10 font-display text-2xl font-bold">{user.email}</h1>
 
       <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-foreground-dim">
         Purchase history

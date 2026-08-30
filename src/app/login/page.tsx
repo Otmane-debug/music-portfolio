@@ -5,8 +5,6 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
@@ -40,33 +38,11 @@ export default function LoginPage() {
               email,
               options: {
                 emailRedirectTo: `${window.location.origin}/auth/callback`,
-                data: {
-                  first_name: firstName,
-                  last_name: lastName,
-                },
               },
             });
             setStatus(error ? "error" : "sent");
           }}
         >
-          <div className="flex gap-3">
-            <input
-              type="text"
-              required
-              placeholder="First name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              className="w-1/2 rounded-lg border border-border bg-transparent px-3 py-2 text-foreground placeholder:text-foreground-dim focus:border-accent focus:outline-none"
-            />
-            <input
-              type="text"
-              required
-              placeholder="Last name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              className="w-1/2 rounded-lg border border-border bg-transparent px-3 py-2 text-foreground placeholder:text-foreground-dim focus:border-accent focus:outline-none"
-            />
-          </div>
           <input
             type="email"
             required
