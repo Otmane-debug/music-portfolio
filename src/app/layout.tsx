@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import PlayerBar from "@/components/PlayerBar";
 import { PlayerProvider } from "@/lib/player-context";
 import "./globals.css";
@@ -38,6 +39,7 @@ export default function RootLayout({
           <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-28">
             {children}
           </main>
+          <Footer />
           <PlayerBar />
         </PlayerProvider>
       </body>

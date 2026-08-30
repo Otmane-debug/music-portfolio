@@ -2,7 +2,13 @@
 
 import { usePlayer } from "@/lib/player-context";
 import EqBars from "@/components/EqBars";
-import { NextIcon, PauseIcon, PlayIcon, PrevIcon } from "@/components/icons";
+import {
+  CloseIcon,
+  NextIcon,
+  PauseIcon,
+  PlayIcon,
+  PrevIcon,
+} from "@/components/icons";
 
 function formatTime(seconds: number) {
   if (!Number.isFinite(seconds)) return "0:00";
@@ -14,8 +20,17 @@ function formatTime(seconds: number) {
 }
 
 export default function PlayerBar() {
-  const { currentTrack, isPlaying, currentTime, duration, toggle, seek, playNext, playPrev } =
-    usePlayer();
+  const {
+    currentTrack,
+    isPlaying,
+    currentTime,
+    duration,
+    toggle,
+    seek,
+    playNext,
+    playPrev,
+    closePlayer,
+  } = usePlayer();
 
   if (!currentTrack) return null;
 
@@ -68,6 +83,14 @@ export default function PlayerBar() {
         </span>
 
         {isPlaying && <EqBars />}
+
+        <button
+          onClick={closePlayer}
+          aria-label="Close player"
+          className="shrink-0 text-foreground-dim transition hover:text-accent"
+        >
+          <CloseIcon className="h-4 w-4" />
+        </button>
       </div>
     </div>
   );

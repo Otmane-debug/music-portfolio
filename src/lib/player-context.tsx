@@ -27,6 +27,7 @@ type PlayerContextValue = {
   seek: (time: number) => void;
   playNext: () => void;
   playPrev: () => void;
+  closePlayer: () => void;
 };
 
 const PlayerContext = createContext<PlayerContextValue | null>(null);
@@ -87,6 +88,15 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     if (prev) playTrack(prev);
   }, [currentTrack, playlist, playTrack]);
 
+  const closePlayer = useCallback(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.pause();
+      audio.removeAttribute("src");
+    }
+    setCurrentTrack(null);
+  }, []);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -126,6 +136,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         seek,
         playNext,
         playPrev,
+        closePlayer,
       }}
     >
       {children}
