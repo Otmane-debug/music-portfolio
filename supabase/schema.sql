@@ -47,11 +47,28 @@ create policy "Users can view their own purchases"
 -- service-role key, from the server, after Stripe payment is verified
 -- (see src/app/api/purchase-download/[trackId]/route.ts).
 
+create table if not exists public.gear (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  category text,          -- e.g. "Guitar", "Amp", "Interface", "Mic", "Headphones"
+  description text,
+  image_path text,        -- path inside the public "gear" bucket
+  sort_order integer not null default 0,
+  created_at timestamptz not null default now()
+);
+
+alter table public.gear enable row level security;
+
+create policy "Gear is publicly readable"
+  on public.gear for select
+  using (true);
+
 -- --- Storage buckets ---
 -- Create these from the Supabase dashboard (Storage):
 --   1. "tracks-public"  -> Public bucket, used for streaming previews.
 --   2. "covers"         -> Public bucket, used for cover art.
 --   3. "tracks-private"  -> Private bucket, used for gated downloads.
+--   4. "gear"           -> Public bucket, used for equipment photos.
 --
 -- For "tracks-private", no public policy is needed: the app's server-side
 -- API route uses the service-role key to mint a short-lived signed URL

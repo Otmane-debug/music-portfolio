@@ -24,6 +24,12 @@ export default async function Header() {
           </span>
         </Link>
         <nav className="flex items-center gap-4">
+          <Link
+            href="/gear"
+            className="hidden font-mono text-xs uppercase tracking-wide text-foreground-dim transition hover:text-accent sm:inline"
+          >
+            Gear
+          </Link>
           {user ? (
             <>
               <Link
