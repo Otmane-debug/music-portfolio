@@ -37,6 +37,12 @@ export async function GET(
     );
 
   if (!paidForThisTrack) {
+    console.error("DEBUG purchase verification failed", {
+      trackId,
+      expectedPriceId: track.stripe_price_id,
+      paymentStatus: session.payment_status,
+      lineItemPriceIds: session.line_items?.data.map((item) => item.price?.id),
+    });
     return NextResponse.json(
       { error: "Payment not verified for this track" },
       { status: 403 },
