@@ -16,7 +16,7 @@ export default async function Header() {
           <Logo className="h-8 w-8 shrink-0 text-accent" />
           <span className="flex flex-col leading-none">
             <span className="font-display text-lg font-bold tracking-tight">
-              Otmanes Music
+              Otmane&apos;s Music
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground-dim transition group-hover:text-accent">
               guitare · électroacoustique · ableton
