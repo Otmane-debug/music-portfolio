@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { usePlayer } from "@/lib/player-context";
-import DownloadButton from "@/components/DownloadButton";
 import EqBars from "@/components/EqBars";
 import { PauseIcon, PlayIcon } from "@/components/icons";
 
@@ -14,13 +13,7 @@ type Row = {
   buyLink: string | null;
 };
 
-export default function TrackRows({
-  tracks,
-  isLoggedIn,
-}: {
-  tracks: Row[];
-  isLoggedIn: boolean;
-}) {
+export default function TrackRows({ tracks }: { tracks: Row[] }) {
   const { registerPlaylist, playTrack, currentTrack, isPlaying } = usePlayer();
 
   useEffect(() => {
@@ -83,8 +76,6 @@ export default function TrackRows({
                 Buy
               </a>
             )}
-
-            <DownloadButton trackId={track.id} isLoggedIn={isLoggedIn} />
           </li>
         );
       })}

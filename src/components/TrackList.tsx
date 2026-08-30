@@ -52,10 +52,10 @@ export default async function TrackList() {
     <div className="space-y-4">
       {!isLoggedIn && (
         <p className="font-mono text-xs uppercase tracking-wide text-foreground-dim">
-          Sign in to download or buy tracks.
+          Sign in to buy tracks.
         </p>
       )}
-      <TrackRows tracks={rows} isLoggedIn={isLoggedIn} />
+      <TrackRows tracks={rows} />
     </div>
   );
 }

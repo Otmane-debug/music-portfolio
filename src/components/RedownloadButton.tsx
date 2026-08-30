@@ -1,28 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function DownloadButton({
-  trackId,
-  isLoggedIn,
-}: {
-  trackId: string;
-  isLoggedIn: boolean;
-}) {
-  const router = useRouter();
+export default function RedownloadButton({ trackId }: { trackId: string }) {
   const [loading, setLoading] = useState(false);
-
-  if (!isLoggedIn) {
-    return (
-      <button
-        onClick={() => router.push("/login")}
-        className="shrink-0 font-mono text-xs uppercase tracking-wide text-foreground-dim underline decoration-border underline-offset-4 transition hover:text-accent"
-      >
-        Sign in
-      </button>
-    );
-  }
 
   return (
     <button

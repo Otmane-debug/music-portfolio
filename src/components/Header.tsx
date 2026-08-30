@@ -34,9 +34,9 @@ export default async function Header() {
             <>
               <Link
                 href="/account"
-                className="hidden font-mono text-xs text-foreground-dim transition hover:text-accent sm:inline"
+                className="rounded-full border border-border px-4 py-1.5 font-mono text-xs uppercase tracking-wide transition hover:border-accent hover:text-accent"
               >
-                {user.email}
+                Profile
               </Link>
               <LogoutButton />
             </>

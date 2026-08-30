@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import RedownloadButton from "@/components/RedownloadButton";
 
 export default async function AccountPage() {
   const supabase = await createClient();
@@ -13,7 +14,7 @@ export default async function AccountPage() {
 
   const { data: purchases } = await supabase
     .from("purchases")
-    .select("id, created_at, tracks (title)")
+    .select("id, track_id, created_at, tracks (title)")
     .order("created_at", { ascending: false });
 
   const firstName = user.user_metadata?.first_name as string | undefined;
@@ -49,8 +50,11 @@ export default async function AccountPage() {
                 {(purchase.tracks as unknown as { title: string } | null)
                   ?.title ?? "Untitled track"}
               </span>
-              <span className="font-mono text-xs text-foreground-dim">
-                {new Date(purchase.created_at).toLocaleDateString()}
+              <span className="flex items-center gap-4">
+                <span className="font-mono text-xs text-foreground-dim">
+                  {new Date(purchase.created_at).toLocaleDateString()}
+                </span>
+                <RedownloadButton trackId={purchase.track_id} />
               </span>
             </li>
           ))}
