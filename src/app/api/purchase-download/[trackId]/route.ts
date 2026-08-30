@@ -43,10 +43,35 @@ export async function GET(
     );
   }
 
+  // The buy link carries client_reference_id=<user.id>, set while the
+  // buyer was signed in — required so the purchase can be credited to
+  // their account and show up in their purchase history.
+  const userId = session.client_reference_id;
+  if (!userId) {
+    return NextResponse.json(
+      { error: "Purchase isn't linked to a signed-in account" },
+      { status: 400 },
+    );
+  }
+
+  const admin = createAdminClient();
+
+  const { error: purchaseError } = await admin.from("purchases").upsert(
+    {
+      user_id: userId,
+      track_id: trackId,
+      stripe_session_id: session.id,
+    },
+    { onConflict: "stripe_session_id" },
+  );
+
+  if (purchaseError) {
+    return NextResponse.json({ error: "Could not record purchase" }, { status: 500 });
+  }
+
   const extension = track.download_path.split(".").pop();
   const filename = `${track.title}.${extension}`;
 
-  const admin = createAdminClient();
   const { data, error } = await admin.storage
     .from("tracks-private")
     .createSignedUrl(track.download_path, 300, { download: filename });

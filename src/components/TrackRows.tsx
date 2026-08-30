@@ -11,7 +11,7 @@ type Row = {
   title: string;
   description: string | null;
   url: string;
-  purchaseLink: string | null;
+  buyLink: string | null;
 };
 
 export default function TrackRows({
@@ -73,9 +73,9 @@ export default function TrackRows({
 
             {isCurrentlyPlaying && <EqBars />}
 
-            {track.purchaseLink && (
+            {track.buyLink && (
               <a
-                href={track.purchaseLink}
+                href={track.buyLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 rounded-full border border-accent px-3 py-1 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"

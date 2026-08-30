@@ -13,7 +13,8 @@ export default async function TrackList() {
     supabase.auth.getUser(),
   ]);
 
-  const isLoggedIn = !!userData.user;
+  const user = userData.user;
+  const isLoggedIn = !!user;
 
   if (!tracks || tracks.length === 0) {
     return (
@@ -28,12 +29,22 @@ export default async function TrackList() {
       .from("tracks-public")
       .getPublicUrl(track.preview_path);
 
+    // Tie the checkout session to the signed-in visitor, so the payment
+    // can be matched back to their account after Stripe redirects here.
+    let buyLink: string | null = null;
+    if (user && track.purchase_link) {
+      const url = new URL(track.purchase_link);
+      url.searchParams.set("client_reference_id", user.id);
+      if (user.email) url.searchParams.set("prefilled_email", user.email);
+      buyLink = url.toString();
+    }
+
     return {
       id: track.id,
       title: track.title,
       description: track.description,
       url: preview.publicUrl,
-      purchaseLink: track.purchase_link,
+      buyLink,
     };
   });
 
@@ -41,7 +52,7 @@ export default async function TrackList() {
     <div className="space-y-4">
       {!isLoggedIn && (
         <p className="font-mono text-xs uppercase tracking-wide text-foreground-dim">
-          Sign in to download tracks.
+          Sign in to download or buy tracks.
         </p>
       )}
       <TrackRows tracks={rows} isLoggedIn={isLoggedIn} />

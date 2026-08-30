@@ -26,9 +26,12 @@ export default async function Header() {
         <nav className="flex items-center gap-4">
           {user ? (
             <>
-              <span className="hidden font-mono text-xs text-foreground-dim sm:inline">
+              <Link
+                href="/account"
+                className="hidden font-mono text-xs text-foreground-dim transition hover:text-accent sm:inline"
+              >
                 {user.email}
-              </span>
+              </Link>
               <LogoutButton />
             </>
           ) : (

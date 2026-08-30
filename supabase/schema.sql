@@ -24,6 +24,29 @@ create policy "Tracks are publicly readable"
 -- or via the service-role key from a trusted script. No write policy is
 -- granted to regular users on purpose.
 
+-- First/last name are collected at sign-up and stored on the auth user
+-- itself (auth.users.raw_user_meta_data), via the `data` option passed to
+-- signInWithOtp() — no separate profiles table needed for that.
+
+create table if not exists public.purchases (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  track_id uuid not null references public.tracks(id) on delete cascade,
+  stripe_session_id text not null unique,
+  created_at timestamptz not null default now()
+);
+
+alter table public.purchases enable row level security;
+
+-- Users can only see their own purchase history.
+create policy "Users can view their own purchases"
+  on public.purchases for select
+  using (auth.uid() = user_id);
+
+-- No insert/update/delete policy: rows are only written by the
+-- service-role key, from the server, after Stripe payment is verified
+-- (see src/app/api/purchase-download/[trackId]/route.ts).
+
 -- --- Storage buckets ---
 -- Create these from the Supabase dashboard (Storage):
 --   1. "tracks-public"  -> Public bucket, used for streaming previews.
