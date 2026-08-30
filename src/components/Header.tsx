@@ -14,13 +14,8 @@ export default async function Header() {
       <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-5">
         <Link href="/" className="group flex items-center gap-3">
           <Logo className="h-8 w-8 shrink-0 text-accent" />
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-lg font-bold tracking-tight">
-              Sailor VIII Music
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground-dim transition group-hover:text-accent">
-              electric guitar · electroacoustic · ableton
-            </span>
+          <span className="font-display text-lg font-bold tracking-tight">
+            Sailor VIII Music
           </span>
         </Link>
         <nav className="flex items-center gap-4">
