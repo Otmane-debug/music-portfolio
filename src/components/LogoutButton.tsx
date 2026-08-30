@@ -15,7 +15,7 @@ export default function LogoutButton() {
       }}
       className="rounded-full border border-border px-4 py-1.5 font-mono text-xs uppercase tracking-wide transition hover:border-accent hover:text-accent"
     >
-      Se déconnecter
+      Sign out
     </button>
   );
 }

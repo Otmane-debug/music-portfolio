@@ -1,28 +1,28 @@
-const gear = ["Guitare électrique", "Électroacoustique", "Ableton Live", "Focusrite"];
+const gear = ["Electric Guitar", "Electroacoustic", "Ableton Live", "Focusrite"];
 
 export default function BioSection() {
   return (
     <section className="space-y-8 py-14">
       <div className="space-y-3">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-          Autodidacte · ex-conservatoire
+          Self-taught · ex-conservatory
         </p>
         <h1 className="max-w-xl font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
-          Musique tissée entre cordes et circuits.
+          Music woven from strings and circuits.
         </h1>
       </div>
 
       <p className="max-w-lg text-foreground-dim">
-        Musicien autodidacte, j&apos;ai posé une première année de
-        conservatoire avant que le Covid-19 n&apos;interrompe la formation.
-        Depuis, j&apos;ai continué seul — entre guitare électrique, textures
-        électroacoustiques et compositions sur Ableton Live, enregistrées via
-        une interface Focusrite.
+        A self-taught musician, I spent a first year at the conservatory
+        before the Covid-19 pandemic cut the training short. Since then,
+        I&apos;ve kept learning on my own — moving between electric guitar,
+        electroacoustic textures, and compositions in Ableton Live,
+        recorded through a Focusrite interface.
       </p>
       <p className="max-w-lg text-foreground-dim">
-        En parallèle, je suis ingénieur informatique — ce site est ma propre
-        construction, pensée comme un studio miniature pour partager ma
-        musique directement avec vous.
+        On the side, I&apos;m a software engineer — this site is my own
+        build, designed as a miniature studio to share my music directly
+        with you.
       </p>
 
       <ul className="flex flex-wrap gap-2">
@@ -40,7 +40,7 @@ export default function BioSection() {
         href="mailto:otmanesd9@outlook.fr"
         className="inline-flex items-center gap-1.5 rounded-full border border-accent px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"
       >
-        Me contacter
+        Contact me
       </a>
     </section>
   );

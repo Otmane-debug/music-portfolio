@@ -36,7 +36,7 @@ export default function TrackRows({
           <li key={track.id} className="flex items-center gap-4 py-4">
             <button
               onClick={() => playTrack({ id: track.id, title: track.title, url: track.url })}
-              aria-label={isCurrentlyPlaying ? "Mettre en pause" : "Lire ce morceau"}
+              aria-label={isCurrentlyPlaying ? "Pause" : "Play track"}
               className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition ${
                 isCurrent
                   ? "border-accent bg-accent text-background"

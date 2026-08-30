@@ -10,7 +10,7 @@ export default function TipButton() {
       rel="noopener noreferrer"
       className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-accent px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"
     >
-      Pourboire
+      Tip
     </a>
   );
 }

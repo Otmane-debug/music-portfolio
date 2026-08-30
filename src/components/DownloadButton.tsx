@@ -19,7 +19,7 @@ export default function DownloadButton({
         onClick={() => router.push("/login")}
         className="shrink-0 font-mono text-xs uppercase tracking-wide text-foreground-dim underline decoration-border underline-offset-4 transition hover:text-accent"
       >
-        Se connecter
+        Sign in
       </button>
     );
   }
@@ -40,7 +40,7 @@ export default function DownloadButton({
       }}
       className="shrink-0 font-mono text-xs uppercase tracking-wide text-accent underline decoration-accent/40 underline-offset-4 transition hover:opacity-75"
     >
-      {loading ? "Préparation…" : "Télécharger"}
+      {loading ? "Preparing…" : "Download"}
     </button>
   );
 }

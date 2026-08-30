@@ -17,9 +17,9 @@ const monoFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Otmane's Music",
+  title: "Sailor VIII Music",
   description:
-    "Guitare électrique, électroacoustique et composition Ableton — écoute et téléchargement.",
+    "Electric guitar, electroacoustic textures, and Ableton production — listen and download.",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="fr"
+      lang="en"
       className={`${displayFont.variable} ${monoFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">

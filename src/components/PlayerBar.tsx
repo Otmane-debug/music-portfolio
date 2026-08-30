@@ -25,14 +25,14 @@ export default function PlayerBar() {
         <div className="flex items-center gap-3 text-foreground-dim">
           <button
             onClick={playPrev}
-            aria-label="Morceau précédent"
+            aria-label="Previous track"
             className="transition hover:text-accent"
           >
             <PrevIcon className="h-4 w-4" />
           </button>
           <button
             onClick={toggle}
-            aria-label={isPlaying ? "Pause" : "Lecture"}
+            aria-label={isPlaying ? "Pause" : "Play"}
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-background transition hover:opacity-85"
           >
             {isPlaying ? (
@@ -43,7 +43,7 @@ export default function PlayerBar() {
           </button>
           <button
             onClick={playNext}
-            aria-label="Morceau suivant"
+            aria-label="Next track"
             className="transition hover:text-accent"
           >
             <NextIcon className="h-4 w-4" />

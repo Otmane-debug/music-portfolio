@@ -18,7 +18,7 @@ export default async function TrackList() {
   if (!tracks || tracks.length === 0) {
     return (
       <p className="font-mono text-sm text-foreground-dim">
-        Aucun morceau publié pour le moment — revenez bientôt.
+        No tracks published yet — check back soon.
       </p>
     );
   }
@@ -40,7 +40,7 @@ export default async function TrackList() {
     <div className="space-y-4">
       {!isLoggedIn && (
         <p className="font-mono text-xs uppercase tracking-wide text-foreground-dim">
-          Connecte-toi pour télécharger les morceaux.
+          Sign in to download tracks.
         </p>
       )}
       <TrackRows tracks={rows} isLoggedIn={isLoggedIn} />

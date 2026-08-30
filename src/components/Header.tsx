@@ -16,10 +16,10 @@ export default async function Header() {
           <Logo className="h-8 w-8 shrink-0 text-accent" />
           <span className="flex flex-col leading-none">
             <span className="font-display text-lg font-bold tracking-tight">
-              Otmane&apos;s Music
+              Sailor VIII Music
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground-dim transition group-hover:text-accent">
-              guitare · électroacoustique · ableton
+              electric guitar · electroacoustic · ableton
             </span>
           </span>
         </Link>
@@ -36,7 +36,7 @@ export default async function Header() {
               href="/login"
               className="rounded-full border border-accent px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"
             >
-              Se connecter
+              Sign in
             </Link>
           )}
         </nav>
