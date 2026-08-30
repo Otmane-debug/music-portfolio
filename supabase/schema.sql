@@ -54,6 +54,7 @@ create table if not exists public.gear (
   category text,          -- e.g. "Guitar", "Amp", "Interface", "Mic", "Headphones"
   description text,
   image_path text,        -- path inside the public "gear" bucket
+  specs jsonb,            -- ordered list of {label, value} pairs, e.g. [{"label":"Body","value":"Basswood"}]
   sort_order integer not null default 0,
   created_at timestamptz not null default now()
 );

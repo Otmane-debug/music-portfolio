@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import type { Gear } from "@/lib/types";
-import GearCards from "@/components/GearCards";
 
 export default async function GearGrid() {
   const supabase = await createClient();
@@ -18,16 +18,53 @@ export default async function GearGrid() {
     );
   }
 
-  const items = (gear as Gear[]).map((item) => ({
-    id: item.id,
-    name: item.name,
-    category: item.category,
-    description: item.description,
-    imageUrl: item.image_path
-      ? supabase.storage.from("gear").getPublicUrl(item.image_path).data
-          .publicUrl
-      : null,
-  }));
+  return (
+    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {(gear as Gear[]).map((item) => {
+        const imageUrl = item.image_path
+          ? supabase.storage.from("gear").getPublicUrl(item.image_path).data
+              .publicUrl
+          : null;
 
-  return <GearCards items={items} />;
+        return (
+          <li key={item.id}>
+            <Link
+              href={`/gear/${item.id}`}
+              className="group block w-full overflow-hidden rounded-xl border border-border text-left transition hover:border-accent"
+            >
+              <div className="aspect-[4/3] w-full overflow-hidden bg-background-alt">
+                {imageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={imageUrl}
+                    alt={item.name}
+                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center font-mono text-xs uppercase tracking-wide text-foreground-dim">
+                    No photo yet
+                  </div>
+                )}
+              </div>
+              <div className="space-y-1 p-4">
+                {item.category && (
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                    {item.category}
+                  </p>
+                )}
+                <h3 className="font-display text-lg text-foreground">
+                  {item.name}
+                </h3>
+                {item.description && (
+                  <p className="line-clamp-2 text-sm text-foreground-dim">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
 }

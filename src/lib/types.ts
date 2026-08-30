@@ -11,12 +11,18 @@ export type Track = {
   created_at: string;
 };
 
+export type GearSpec = {
+  label: string;
+  value: string;
+};
+
 export type Gear = {
   id: string;
   name: string;
   category: string | null;
   description: string | null;
   image_path: string | null;
+  specs: GearSpec[] | null;
   sort_order: number;
   created_at: string;
 };
