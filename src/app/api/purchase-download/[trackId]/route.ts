@@ -79,12 +79,30 @@ export async function GET(
     .createSignedUrl(track.download_path, 300, { download: filename });
 
   if (error || !data) {
-    console.error("DEBUG storage error", {
-      downloadPath: track.download_path,
-      error,
-    });
     return NextResponse.json({ error: "Storage error" }, { status: 500 });
   }
 
-  return NextResponse.redirect(data.signedUrl);
+  // The signed URL sets Content-Disposition: attachment, so navigating to
+  // it starts a download without leaving this page — show a proper thank
+  //-you page instead of a blank tab, with a way back into the site.
+  const html = `<!DOCTYPE html>
+<html>
+  <head><meta charset="utf-8" /><title>${track.title}</title></head>
+  <body style="margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0e0c0a;color:#f5efe6;font-family:system-ui,sans-serif;">
+    <div style="text-align:center;max-width:420px;padding:0 24px;">
+      <p style="color:#ff4d1c;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px;">Purchase complete</p>
+      <h1 style="font-size:24px;margin:0 0 12px;">Thanks for your purchase!</h1>
+      <p style="color:#a89f8f;font-size:14px;line-height:1.6;margin:0 0 28px;">Your download of "${track.title}" is starting automatically. You can also find it anytime in your account's purchase history.</p>
+      <a href="/" style="display:inline-block;background:#ff4d1c;color:#0e0c0a;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:12px 28px;border-radius:999px;margin-right:12px;">Back to home</a>
+      <a href="/account" style="display:inline-block;color:#a89f8f;text-decoration:underline;font-size:13px;">View purchases</a>
+    </div>
+    <script>
+      window.location.href = ${JSON.stringify(data.signedUrl)};
+    </script>
+  </body>
+</html>`;
+
+  return new NextResponse(html, {
+    headers: { "Content-Type": "text/html" },
+  });
 }
