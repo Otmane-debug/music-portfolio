@@ -44,6 +44,7 @@ export default async function TrackList() {
       title: track.title,
       description: track.description,
       url: preview.publicUrl,
+      durationSeconds: track.duration_seconds,
       buyLink,
     };
   });

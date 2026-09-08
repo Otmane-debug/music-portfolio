@@ -1,6 +1,7 @@
 "use client";
 
 import { usePlayer } from "@/lib/player-context";
+import { formatTime } from "@/lib/format";
 import EqBars from "@/components/EqBars";
 import {
   CloseIcon,
@@ -9,15 +10,6 @@ import {
   PlayIcon,
   PrevIcon,
 } from "@/components/icons";
-
-function formatTime(seconds: number) {
-  if (!Number.isFinite(seconds)) return "0:00";
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60)
-    .toString()
-    .padStart(2, "0");
-  return `${m}:${s}`;
-}
 
 export default function PlayerBar() {
   const {
@@ -78,7 +70,7 @@ export default function PlayerBar() {
           />
         </div>
 
-        <span className="hidden shrink-0 font-mono text-xs text-foreground-dim sm:block">
+        <span className="shrink-0 font-mono text-xs text-foreground-dim">
           {formatTime(currentTime)} / {formatTime(duration)}
         </span>
 

@@ -8,6 +8,7 @@ export type Track = {
   purchase_link: string | null;
   stripe_price_id: string | null;
   stripe_product_id: string | null;
+  duration_seconds: number | null;
   created_at: string;
 };
 

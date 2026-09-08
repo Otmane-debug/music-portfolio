@@ -10,6 +10,7 @@ create table if not exists public.tracks (
   purchase_link text,     -- external checkout URL (Stripe Payment Link, Gumroad, etc.)
   stripe_price_id text,   -- unused for verification (kept for reference)
   stripe_product_id text, -- Stripe Product ID (prod_...) used to verify payment server-side
+  duration_seconds integer, -- track length in seconds, shown in the catalog
   created_at timestamptz not null default now()
 );
 

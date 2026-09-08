@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePlayer } from "@/lib/player-context";
+import { formatTime } from "@/lib/format";
 import EqBars from "@/components/EqBars";
 import { PauseIcon, PlayIcon } from "@/components/icons";
 
@@ -10,6 +11,7 @@ type Row = {
   title: string;
   description: string | null;
   url: string;
+  durationSeconds: number | null;
   buyLink: string | null;
 };
 
@@ -65,6 +67,12 @@ export default function TrackRows({ tracks }: { tracks: Row[] }) {
             </div>
 
             {isCurrentlyPlaying && <EqBars />}
+
+            {track.durationSeconds != null && (
+              <span className="shrink-0 font-mono text-xs text-foreground-dim">
+                {formatTime(track.durationSeconds)}
+              </span>
+            )}
 
             {track.buyLink && (
               <a
