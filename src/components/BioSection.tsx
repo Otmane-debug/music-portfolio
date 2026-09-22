@@ -1,4 +1,10 @@
-const gear = ["Electric Guitar", "Electroacoustic", "Ableton Live", "Focusrite"];
+const gear = [
+  "Electric Guitar",
+  "Electroacoustic",
+  "Ableton Live",
+  "Focusrite",
+  "Akai MPK Mini MK4",
+];
 
 export default function BioSection() {
   return (
