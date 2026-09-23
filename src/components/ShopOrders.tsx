@@ -57,17 +57,33 @@ export default async function ShopOrders() {
             </p>
           ) : (
             order.status && (
-              <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-accent">
-                <span>{order.status.label}</span>
-                {order.status.trackingUrl && (
-                  <a
-                    href={order.status.trackingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:opacity-80"
-                  >
-                    Suivre le colis
-                  </a>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs uppercase tracking-wide">
+                <div className="flex items-center gap-2 text-accent">
+                  <span>{order.status.label}</span>
+                  {order.status.trackingUrl && (
+                    <a
+                      href={order.status.trackingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:opacity-80"
+                    >
+                      Suivre le colis
+                    </a>
+                  )}
+                </div>
+                {order.status.minDeliveryDate && order.status.maxDeliveryDate && (
+                  <span className="text-foreground-dim">
+                    Livraison estimée{" "}
+                    {new Date(order.status.minDeliveryDate).toLocaleDateString(
+                      "fr-FR",
+                      { day: "numeric", month: "short" },
+                    )}
+                    {" – "}
+                    {new Date(order.status.maxDeliveryDate).toLocaleDateString(
+                      "fr-FR",
+                      { day: "numeric", month: "short" },
+                    )}
+                  </span>
                 )}
               </div>
             )
