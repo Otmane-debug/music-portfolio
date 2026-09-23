@@ -61,15 +61,27 @@ create table if not exists public.shop_orders (
   amount_total_cents integer not null,
   fulfillment_status text not null default 'pending',
   refunded boolean not null default false,
+  email text,
+  emailed_in_production boolean not null default false,
+  emailed_shipped boolean not null default false,
+  emailed_delivered boolean not null default false,
   created_at timestamptz not null default now()
 );
 
 -- If shop_orders already existed from an earlier run of this file, add the
--- two newer columns without touching existing rows.
+-- newer columns without touching existing rows.
 alter table public.shop_orders
   add column if not exists fulfillment_status text not null default 'pending';
 alter table public.shop_orders
   add column if not exists refunded boolean not null default false;
+alter table public.shop_orders
+  add column if not exists email text;
+alter table public.shop_orders
+  add column if not exists emailed_in_production boolean not null default false;
+alter table public.shop_orders
+  add column if not exists emailed_shipped boolean not null default false;
+alter table public.shop_orders
+  add column if not exists emailed_delivered boolean not null default false;
 
 alter table public.shop_orders enable row level security;
 

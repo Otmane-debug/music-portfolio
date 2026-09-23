@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createStripeClient } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getShopProduct } from "@/lib/shop/products";
+import { sendOrderEmail } from "@/lib/email/orderEmail";
 
 export async function GET(request: Request) {
   const sessionId = new URL(request.url).searchParams.get("session_id");
@@ -82,6 +83,10 @@ export async function GET(request: Request) {
     // the Gelato order for support/lookup purposes. The print order above
     // already went through, so a DB hiccup here must not 500 the buyer's
     // redirect to the confirmation page.
+    const variantLabel =
+      product.variants.find((v) => v.id === variantId)?.label ?? "";
+    const amountTotalCents = session.amount_total ?? 0;
+
     try {
       const admin = createAdminClient();
       await admin.from("shop_orders").upsert(
@@ -91,15 +96,31 @@ export async function GET(request: Request) {
           gelato_order_id: gelatoOrderId,
           product_id: product.id,
           product_name: product.name,
-          variant_label:
-            product.variants.find((v) => v.id === variantId)?.label ?? "",
+          variant_label: variantLabel,
           quantity,
-          amount_total_cents: session.amount_total ?? 0,
+          amount_total_cents: amountTotalCents,
+          email: email ?? null,
         },
         { onConflict: "stripe_session_id" },
       );
     } catch (err) {
       console.error("Failed to record shop order:", err);
+    }
+
+    if (email) {
+      try {
+        await sendOrderEmail({
+          to: email,
+          step: "confirmed",
+          productName: product.name,
+          variantLabel,
+          quantity,
+          amountTotalCents,
+          siteUrl: origin,
+        });
+      } catch (err) {
+        console.error("Failed to send order confirmation email:", err);
+      }
     }
   }
 
