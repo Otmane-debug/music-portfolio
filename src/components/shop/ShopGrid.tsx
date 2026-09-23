@@ -10,42 +10,76 @@ import {
 } from "@/lib/shop/products";
 import { formatPrice } from "@/lib/format";
 
+type SortOption = "price-desc" | "price-asc" | "alphabetical";
+
+const sortOptions: { id: SortOption; label: string }[] = [
+  { id: "price-desc", label: "Prix décroissant" },
+  { id: "price-asc", label: "Prix croissant" },
+  { id: "alphabetical", label: "Alphabétique" },
+];
+
 export default function ShopGrid() {
   const [activeCategory, setActiveCategory] = useState<ShopCategory | "all">(
     "all",
   );
+  const [sort, setSort] = useState<SortOption>("price-desc");
 
-  const products =
+  const products = (
     activeCategory === "all"
       ? shopProducts
-      : shopProducts.filter((product) => product.category === activeCategory);
+      : shopProducts.filter((product) => product.category === activeCategory)
+  )
+    .slice()
+    .sort((a, b) => {
+      if (sort === "alphabetical") return a.name.localeCompare(b.name);
+      const diff = lowestPriceCents(a) - lowestPriceCents(b);
+      return sort === "price-asc" ? diff : -diff;
+    });
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap gap-2">
-        <button
-          onClick={() => setActiveCategory("all")}
-          className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-wide transition ${
-            activeCategory === "all"
-              ? "border-accent bg-accent text-background"
-              : "border-border text-foreground-dim hover:border-accent hover:text-accent"
-          }`}
-        >
-          Tout
-        </button>
-        {shopCategories.map((category) => (
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-2">
           <button
-            key={category.id}
-            onClick={() => setActiveCategory(category.id)}
+            onClick={() => setActiveCategory("all")}
             className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-wide transition ${
-              activeCategory === category.id
+              activeCategory === "all"
                 ? "border-accent bg-accent text-background"
                 : "border-border text-foreground-dim hover:border-accent hover:text-accent"
             }`}
           >
-            {category.label}
+            Tout
           </button>
-        ))}
+          {shopCategories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`rounded-full border px-4 py-1.5 font-mono text-xs uppercase tracking-wide transition ${
+                activeCategory === category.id
+                  ? "border-accent bg-accent text-background"
+                  : "border-border text-foreground-dim hover:border-accent hover:text-accent"
+              }`}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
+
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value as SortOption)}
+          className="rounded-full border border-border bg-transparent px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-foreground-dim focus:border-accent focus:outline-none"
+        >
+          {sortOptions.map((option) => (
+            <option
+              key={option.id}
+              value={option.id}
+              className="bg-background text-foreground"
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
