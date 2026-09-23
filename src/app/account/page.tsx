@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import RedownloadButton from "@/components/RedownloadButton";
+import ShopOrders from "@/components/ShopOrders";
 
 export default async function AccountPage() {
   const supabase = await createClient();
@@ -53,6 +54,11 @@ export default async function AccountPage() {
           ))}
         </ul>
       )}
+
+      <h2 className="mb-4 mt-10 font-mono text-xs uppercase tracking-[0.3em] text-foreground-dim">
+        Shop orders
+      </h2>
+      <ShopOrders />
     </div>
   );
 }

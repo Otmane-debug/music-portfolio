@@ -31,6 +31,13 @@ export default function MobileNav({ isLoggedIn }: { isLoggedIn: boolean }) {
           >
             Gear
           </Link>
+          <Link
+            href="/shop"
+            onClick={() => setOpen(false)}
+            className="block rounded-lg px-3 py-2 font-mono text-xs uppercase tracking-wide text-foreground-dim transition hover:bg-border/40 hover:text-accent"
+          >
+            Shop
+          </Link>
           {isLoggedIn ? (
             <>
               <Link

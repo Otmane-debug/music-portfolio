@@ -49,6 +49,39 @@ create policy "Users can view their own purchases"
 -- service-role key, from the server, after Stripe payment is verified
 -- (see src/app/api/purchase-download/[trackId]/route.ts).
 
+create table if not exists public.shop_orders (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete cascade,
+  stripe_session_id text not null unique,
+  gelato_order_id text,
+  product_id text not null,
+  product_name text not null,
+  variant_label text not null,
+  quantity integer not null default 1,
+  amount_total_cents integer not null,
+  fulfillment_status text not null default 'pending',
+  refunded boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+-- If shop_orders already existed from an earlier run of this file, add the
+-- two newer columns without touching existing rows.
+alter table public.shop_orders
+  add column if not exists fulfillment_status text not null default 'pending';
+alter table public.shop_orders
+  add column if not exists refunded boolean not null default false;
+
+alter table public.shop_orders enable row level security;
+
+-- Users can only see their own shop orders.
+create policy "Users can view their own shop orders"
+  on public.shop_orders for select
+  using (auth.uid() = user_id);
+
+-- No insert/update/delete policy: rows are only written by the
+-- service-role key, from the server, after Stripe payment is verified
+-- (see src/app/api/shop/complete/route.ts).
+
 create table if not exists public.gear (
   id uuid primary key default gen_random_uuid(),
   name text not null,

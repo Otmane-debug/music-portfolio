@@ -27,6 +27,12 @@ export default async function Header() {
           >
             Gear
           </Link>
+          <Link
+            href="/shop"
+            className="font-mono text-xs uppercase tracking-wide text-foreground-dim transition hover:text-accent"
+          >
+            Shop
+          </Link>
           {user ? (
             <>
               <Link
