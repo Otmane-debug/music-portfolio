@@ -1,13 +1,13 @@
 const STATUS_LABELS: Record<string, string> = {
-  draft: "Brouillon",
-  pending: "En attente",
-  printed: "Imprimée",
-  in_production: "En impression",
-  failed: "Échouée",
-  passed: "Validée",
-  canceled: "Annulée",
-  shipped: "Expédiée",
-  delivered: "Livrée",
+  draft: "Draft",
+  pending: "Pending",
+  printed: "Printed",
+  in_production: "In production",
+  failed: "Failed",
+  passed: "Passed",
+  canceled: "Canceled",
+  shipped: "Shipped",
+  delivered: "Delivered",
 };
 
 export async function getGelatoOrderStatus(gelatoOrderId: string) {

@@ -50,7 +50,7 @@ export default function ProductGallery({
       <button
         onClick={() => setLightboxOpen(true)}
         className="block aspect-square w-full cursor-zoom-in overflow-hidden rounded-xl border border-border bg-background-alt"
-        aria-label="Agrandir l'image"
+        aria-label="Zoom in"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -90,7 +90,7 @@ export default function ProductGallery({
         >
           <button
             onClick={() => setLightboxOpen(false)}
-            aria-label="Fermer"
+            aria-label="Close"
             className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-lg text-white ring-1 ring-white/40 transition hover:bg-white/30"
           >
             ✕
@@ -102,7 +102,7 @@ export default function ProductGallery({
                 e.stopPropagation();
                 prev();
               }}
-              aria-label="Image précédente"
+              aria-label="Previous image"
               className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-2xl text-white ring-1 ring-white/40 transition hover:bg-white/30 sm:left-6"
             >
               ‹
@@ -123,7 +123,7 @@ export default function ProductGallery({
                 e.stopPropagation();
                 next();
               }}
-              aria-label="Image suivante"
+              aria-label="Next image"
               className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-2xl text-white ring-1 ring-white/40 transition hover:bg-white/30 sm:right-6"
             >
               ›

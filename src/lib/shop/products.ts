@@ -26,8 +26,8 @@ function galleryFor(basePath: string) {
 
 const MUG_UID = "mug_product_msz_11-oz_mmat_ceramic-white_cl_4-0";
 const MUG_DESCRIPTION = [
-  "Ce magnifique mug en céramique est parfait pour tous les événements de la journée : un café du matin, un chocolat chaud, ou toute autre boisson chaude que tu apprécies. Le mug est d'un blanc brillant avec un bord, un intérieur et une poignée colorés. Les impressions ressortent magnifiquement avec des couleurs vives. L'impression conserve sa qualité et son éclat même après l'utilisation au micro-ondes et au lave-vaisselle.",
-  "Mug en céramique 325 ml (11 oz) — peut être mis au micro-ondes — bord, intérieur et poignée colorés — zone d'impression blanche.",
+  "This beautiful ceramic mug is perfect for every moment of the day: a morning coffee, a hot chocolate, or any other hot drink you enjoy. The mug has a glossy white finish with a colored rim, interior, and handle. Prints come out beautifully with vivid colors, and the print keeps its quality and shine even after the microwave and dishwasher.",
+  "Ceramic mug, 11 oz (325 ml) — microwave safe — colored rim, interior, and handle — white print area.",
 ];
 
 export const shopProducts: ShopProduct[] = [
@@ -42,7 +42,7 @@ export const shopProducts: ShopProduct[] = [
     designFile: "/shop/mugs/waveform/design.png",
     shippingCents: 499,
     variants: [
-      { id: "default", label: "Unique", priceCents: 1026, gelatoProductUid: MUG_UID },
+      { id: "default", label: "One size", priceCents: 1026, gelatoProductUid: MUG_UID },
     ],
   },
   {
@@ -56,7 +56,7 @@ export const shopProducts: ShopProduct[] = [
     designFile: "/shop/mugs/harmonic-ratios/design.png",
     shippingCents: 499,
     variants: [
-      { id: "default", label: "Unique", priceCents: 1026, gelatoProductUid: MUG_UID },
+      { id: "default", label: "One size", priceCents: 1026, gelatoProductUid: MUG_UID },
     ],
   },
   {
@@ -70,7 +70,7 @@ export const shopProducts: ShopProduct[] = [
     designFile: "/shop/mugs/side-a-side-b/design.png",
     shippingCents: 499,
     variants: [
-      { id: "default", label: "Unique", priceCents: 1026, gelatoProductUid: MUG_UID },
+      { id: "default", label: "One size", priceCents: 1026, gelatoProductUid: MUG_UID },
     ],
   },
   {
@@ -79,8 +79,8 @@ export const shopProducts: ShopProduct[] = [
     name: "T-shirt High Bias",
     tagline: "Mixtape Vol. 08 — Type II",
     description: [
-      "Ce t-shirt, réputé pour sa douceur au toucher, est idéal pour l'impression DTG.",
-      "Col sans couture aiguille double avec haute densité de points pour une surface d'impression plus lisse. Comprend une étiquette détachable pour un rebranding facile. Coupe tubulaire pour une torsion minimale. Disponible dans une large gamme de couleurs pour répondre à divers besoins de design.",
+      "Known for its soft feel, this t-shirt is ideal for DTG printing.",
+      "Seamless double-needle collar with a high stitch density for a smoother print surface. Includes a tear-away label for easy rebranding. Tubular fit for minimal torque. Available in a wide range of colors for various design needs.",
     ],
     image: "/shop/tshirt/photo-1.jpg",
     gallery: galleryFor("/shop/tshirt"),
@@ -101,8 +101,8 @@ export const shopProducts: ShopProduct[] = [
     name: "Hoodie Harmonic Ratios",
     tagline: "2:1 · 3:2 · 4:3",
     description: [
-      "Un sweat à capuche épais, fabriqué à partir d'un doux mélange 50% coton et 50% polyester.",
-      "Doté d'une capuche doublée avec cordon de serrage assorti. La filature à jet d'air du tissu offre une sensation de douceur et réduit le boulochage. Comprend une poche ventrale, des poignets en tricot côtelé et une ceinture montée en élasthanne.",
+      "A thick hoodie made from a soft 50% cotton, 50% polyester blend.",
+      "Features a lined hood with matching drawstrings. Air-jet spun yarn gives it a soft feel and reduces pilling. Includes a pouch pocket, ribbed cuffs, and a spandex-lined waistband.",
     ],
     image: "/shop/hoodie-harmonic-ratios/photo-1.jpg",
     gallery: galleryFor("/shop/hoodie-harmonic-ratios"),
@@ -125,8 +125,8 @@ export const shopProducts: ShopProduct[] = [
     name: "Hoodie Long Play",
     tagline: "Side A · 33 1/3 RPM",
     description: [
-      "Un sweat-shirt à capuche unisexe confortable et durable, fabriqué à partir d'un mélange de coton bio et de polyester recyclé.",
-      "80% coton bio et 20% polyester recyclé. Construction à 3 fils pour plus de durabilité. Doublure brossée pour plus de chaleur et de confort. Cordon de serrage avec œillets stoppers métalliques.",
+      "A comfortable, durable unisex hoodie made from a blend of organic cotton and recycled polyester.",
+      "80% organic cotton, 20% recycled polyester. 3-thread construction for extra durability. Brushed lining for extra warmth and comfort. Drawstring with metal eyelets.",
     ],
     image: "/shop/hoodie-long-play/photo-1.jpg",
     gallery: galleryFor("/shop/hoodie-long-play"),

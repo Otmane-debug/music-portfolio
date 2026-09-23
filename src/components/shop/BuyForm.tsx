@@ -54,7 +54,7 @@ export default function BuyForm({
       {hasSizes && (
         <div className="space-y-2">
           <p className="font-mono text-xs uppercase tracking-wide text-foreground-dim">
-            Taille
+            Size
           </p>
           <div className="flex flex-wrap gap-2">
             {product.variants.map((v) => (
@@ -80,10 +80,10 @@ export default function BuyForm({
         className="inline-flex items-center gap-1.5 rounded-full border border-accent px-6 py-2 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background disabled:opacity-50"
       >
         {loading
-          ? "Redirection…"
+          ? "Redirecting…"
           : isLoggedIn
-            ? "Acheter"
-            : "Se connecter pour acheter"}
+            ? "Buy"
+            : "Sign in to buy"}
       </button>
 
       {error && (
@@ -91,7 +91,7 @@ export default function BuyForm({
       )}
 
       <p className="font-mono text-[10px] uppercase tracking-wide text-foreground-dim">
-        + {formatPrice(product.shippingCents)} de livraison (France)
+        + {formatPrice(product.shippingCents)} shipping (France)
       </p>
     </div>
   );

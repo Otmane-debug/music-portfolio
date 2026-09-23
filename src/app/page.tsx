@@ -23,14 +23,14 @@ export default function Home() {
           Shop
         </h2>
         <p className="max-w-lg text-foreground-dim">
-          Mugs, t-shirts et hoodies imprimés à la demande — livrés
-          directement chez toi.
+          Mugs, t-shirts, and hoodies printed on demand — shipped straight
+          to your door.
         </p>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { src: "/shop/tshirt/photo-3.jpg", alt: "T-shirt Sailor VIII porté" },
-            { src: "/shop/tshirt/photo-4.jpg", alt: "T-shirt Sailor VIII porté" },
-            { src: "/shop/mugs/waveform/photo-2.jpg", alt: "Mug Sailor VIII sur une table" },
+            { src: "/shop/tshirt/photo-3.jpg", alt: "Sailor VIII t-shirt being worn" },
+            { src: "/shop/tshirt/photo-4.jpg", alt: "Sailor VIII t-shirt being worn" },
+            { src: "/shop/mugs/waveform/photo-2.jpg", alt: "Sailor VIII mug on a table" },
           ].map((photo) => (
             <Link
               key={photo.src}
@@ -50,7 +50,7 @@ export default function Home() {
           href="/shop"
           className="inline-flex items-center gap-1.5 rounded-full border border-accent px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background"
         >
-          Voir le shop
+          Visit the shop
         </Link>
       </section>
 

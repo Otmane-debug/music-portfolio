@@ -11,8 +11,8 @@ export default function ShopPage() {
           Wear the sound.
         </h1>
         <p className="max-w-lg text-foreground-dim">
-          Mugs, t-shirts et hoodies imprimés à la demande — livrés directement
-          chez toi.
+          Mugs, t-shirts, and hoodies printed on demand — shipped straight to
+          your door.
         </p>
       </div>
 

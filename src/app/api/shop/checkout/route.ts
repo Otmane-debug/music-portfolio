@@ -38,7 +38,7 @@ export async function POST(request: Request) {
           unit_amount: variant.priceCents,
           product_data: {
             name:
-              variant.label === "Unique"
+              variant.label === "One size"
                 ? product.name
                 : `${product.name} — ${variant.label}`,
             images: [`${origin}${product.image}`],
@@ -48,13 +48,14 @@ export async function POST(request: Request) {
         adjustable_quantity: { enabled: true, minimum: 1, maximum: 5 },
       },
     ],
+    locale: "en",
     shipping_address_collection: { allowed_countries: ["FR", "BE", "CH", "LU", "MC"] },
     shipping_options: [
       {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: { amount: product.shippingCents, currency: "eur" },
-          display_name: "Livraison standard",
+          display_name: "Standard shipping",
         },
       },
     ],

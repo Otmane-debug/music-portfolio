@@ -39,7 +39,7 @@ export default async function ShopOrders() {
           <div className="flex items-center justify-between">
             <span>
               {order.product_name}
-              {order.variant_label !== "Unique" && ` — ${order.variant_label}`}
+              {order.variant_label !== "One size" && ` — ${order.variant_label}`}
               {order.quantity > 1 && ` × ${order.quantity}`}
             </span>
             <span className="flex items-center gap-4">
@@ -53,7 +53,7 @@ export default async function ShopOrders() {
           </div>
           {order.refunded ? (
             <p className="font-mono text-xs uppercase tracking-wide text-foreground-dim">
-              Remboursé — livraison impossible à cette adresse
+              Refunded — delivery wasn&apos;t possible to this address
             </p>
           ) : (
             order.status && (
@@ -67,20 +67,20 @@ export default async function ShopOrders() {
                       rel="noopener noreferrer"
                       className="underline hover:opacity-80"
                     >
-                      Suivre le colis
+                      Track package
                     </a>
                   )}
                 </div>
                 {order.status.minDeliveryDate && order.status.maxDeliveryDate && (
                   <span className="text-foreground-dim">
-                    Livraison estimée{" "}
+                    Estimated delivery{" "}
                     {new Date(order.status.minDeliveryDate).toLocaleDateString(
-                      "fr-FR",
+                      "en-US",
                       { day: "numeric", month: "short" },
                     )}
                     {" – "}
                     {new Date(order.status.maxDeliveryDate).toLocaleDateString(
-                      "fr-FR",
+                      "en-US",
                       { day: "numeric", month: "short" },
                     )}
                   </span>

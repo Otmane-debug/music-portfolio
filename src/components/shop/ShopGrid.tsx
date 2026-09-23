@@ -13,9 +13,9 @@ import { formatPrice } from "@/lib/format";
 type SortOption = "price-desc" | "price-asc" | "alphabetical";
 
 const sortOptions: { id: SortOption; label: string }[] = [
-  { id: "price-desc", label: "Prix décroissant" },
-  { id: "price-asc", label: "Prix croissant" },
-  { id: "alphabetical", label: "Alphabétique" },
+  { id: "price-desc", label: "Price: high to low" },
+  { id: "price-asc", label: "Price: low to high" },
+  { id: "alphabetical", label: "Alphabetical" },
 ];
 
 export default function ShopGrid() {
@@ -48,7 +48,7 @@ export default function ShopGrid() {
                 : "border-border text-foreground-dim hover:border-accent hover:text-accent"
             }`}
           >
-            Tout
+            All
           </button>
           {shopCategories.map((category) => (
             <button
@@ -105,7 +105,7 @@ export default function ShopGrid() {
                   {product.name}
                 </h3>
                 <p className="font-mono text-sm text-foreground-dim">
-                  {product.variants.length > 1 ? "À partir de " : ""}
+                  {product.variants.length > 1 ? "From " : ""}
                   {formatPrice(lowestPriceCents(product))}
                 </p>
               </div>

@@ -25,32 +25,32 @@ const STEP_COPY: Record<
   { badge: string; heading: string; intro: string }
 > = {
   confirmed: {
-    badge: "Commande confirmée",
-    heading: "Merci pour ta commande !",
+    badge: "Order confirmed",
+    heading: "Thanks for your order!",
     intro:
-      "On a bien reçu ton paiement. Ta pièce va être imprimée à la demande puis expédiée directement chez toi.",
+      "We've received your payment. Your piece will be printed on demand and shipped straight to you.",
   },
   in_production: {
-    badge: "En fabrication",
-    heading: "Ta commande est en cours d'impression",
+    badge: "In production",
+    heading: "Your order is being printed",
     intro:
-      "Ton atelier d'impression a démarré la fabrication de ta pièce. On te prévient dès qu'elle prend la route.",
+      "Our print shop has started making your piece. We'll let you know as soon as it's on its way.",
   },
   shipped: {
-    badge: "Expédiée",
-    heading: "Ta commande est en route !",
-    intro: "Ta pièce vient de quitter l'atelier et est maintenant en livraison.",
+    badge: "Shipped",
+    heading: "Your order is on its way!",
+    intro: "Your piece just left the print shop and is now out for delivery.",
   },
   delivered: {
-    badge: "Livrée",
-    heading: "Ta commande a été livrée",
+    badge: "Delivered",
+    heading: "Your order has been delivered",
     intro:
-      "Ta pièce est arrivée à destination. On espère qu'elle te plaît — merci d'avoir soutenu Sailor VIII !",
+      "Your piece has arrived. We hope you love it — thanks for supporting Sailor VIII!",
   },
 };
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("fr-FR", {
+  return new Date(iso).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
   });
@@ -59,13 +59,13 @@ function formatDate(iso: string) {
 function renderHtml(data: OrderEmailData) {
   const copy = STEP_COPY[data.step];
   const itemLine = `${data.productName}${
-    data.variantLabel !== "Unique" ? ` — ${data.variantLabel}` : ""
+    data.variantLabel !== "One size" ? ` — ${data.variantLabel}` : ""
   }${data.quantity > 1 ? ` × ${data.quantity}` : ""}`;
 
   const deliveryRow =
     data.step === "shipped" && data.minDeliveryDate && data.maxDeliveryDate
       ? `<tr>
-          <td style="padding:6px 0;color:#a89f8f;font-size:13px;">Livraison estimée</td>
+          <td style="padding:6px 0;color:#a89f8f;font-size:13px;">Estimated delivery</td>
           <td style="padding:6px 0;color:#f5efe6;font-size:13px;text-align:right;">${formatDate(
             data.minDeliveryDate,
           )} – ${formatDate(data.maxDeliveryDate)}</td>
@@ -75,7 +75,7 @@ function renderHtml(data: OrderEmailData) {
   const trackingButton = data.trackingUrl
     ? `<tr>
         <td align="center" style="padding:28px 0 0;">
-          <a href="${data.trackingUrl}" style="display:inline-block;background:#ff4d1c;color:#0e0c0a;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:12px 28px;border-radius:999px;">Suivre le colis</a>
+          <a href="${data.trackingUrl}" style="display:inline-block;background:#ff4d1c;color:#0e0c0a;text-decoration:none;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:12px 28px;border-radius:999px;">Track package</a>
         </td>
       </tr>`
     : "";
@@ -117,7 +117,7 @@ function renderHtml(data: OrderEmailData) {
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                   <tr>
                     <td align="center" style="padding-top:20px;">
-                      <a href="${data.siteUrl}/account" style="color:#a89f8f;text-decoration:underline;font-size:13px;">Voir mes commandes</a>
+                      <a href="${data.siteUrl}/account" style="color:#a89f8f;text-decoration:underline;font-size:13px;">View my orders</a>
                     </td>
                   </tr>
                 </table>
@@ -137,10 +137,10 @@ function renderHtml(data: OrderEmailData) {
 }
 
 const SUBJECTS: Record<OrderEmailStep, (productName: string) => string> = {
-  confirmed: (name) => `Commande confirmée — ${name}`,
-  in_production: (name) => `Ta commande "${name}" est en fabrication`,
-  shipped: (name) => `Ta commande "${name}" est expédiée`,
-  delivered: (name) => `Ta commande "${name}" a été livrée`,
+  confirmed: (name) => `Order confirmed — ${name}`,
+  in_production: (name) => `Your order "${name}" is in production`,
+  shipped: (name) => `Your order "${name}" has shipped`,
+  delivered: (name) => `Your order "${name}" has been delivered`,
 };
 
 export async function sendOrderEmail(data: OrderEmailData) {
