@@ -4,7 +4,13 @@ import { useState } from "react";
 import type { ShopProduct } from "@/lib/shop/products";
 import { formatPrice } from "@/lib/format";
 
-export default function BuyForm({ product }: { product: ShopProduct }) {
+export default function BuyForm({
+  product,
+  isLoggedIn,
+}: {
+  product: ShopProduct;
+  isLoggedIn: boolean;
+}) {
   const [variantId, setVariantId] = useState(product.variants[0].id);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -13,6 +19,13 @@ export default function BuyForm({ product }: { product: ShopProduct }) {
   const hasSizes = product.variants.length > 1;
 
   async function handleBuy() {
+    // Buying requires an account so the order can be tied to it and show
+    // up in the buyer's purchase history (see ShopOrders).
+    if (!isLoggedIn) {
+      window.location.href = `/login?next=${encodeURIComponent(`/shop/${product.id}`)}`;
+      return;
+    }
+
     setLoading(true);
     setError(null);
     try {
@@ -66,7 +79,11 @@ export default function BuyForm({ product }: { product: ShopProduct }) {
         disabled={loading}
         className="inline-flex items-center gap-1.5 rounded-full border border-accent px-6 py-2 font-mono text-xs uppercase tracking-wide text-accent transition hover:bg-accent hover:text-background disabled:opacity-50"
       >
-        {loading ? "Redirection…" : "Acheter"}
+        {loading
+          ? "Redirection…"
+          : isLoggedIn
+            ? "Acheter"
+            : "Se connecter pour acheter"}
       </button>
 
       {error && (

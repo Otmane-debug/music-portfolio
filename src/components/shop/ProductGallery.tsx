@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ProductGallery({
   images,
@@ -11,19 +11,39 @@ export default function ProductGallery({
 }) {
   const [active, setActive] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  const next = () => setActive((i) => (i + 1) % images.length);
+  const prev = () => setActive((i) => (i - 1 + images.length) % images.length);
 
   useEffect(() => {
     if (!lightboxOpen) return;
 
     function handleKey(e: KeyboardEvent) {
       if (e.key === "Escape") setLightboxOpen(false);
-      if (e.key === "ArrowRight") setActive((i) => (i + 1) % images.length);
-      if (e.key === "ArrowLeft")
-        setActive((i) => (i - 1 + images.length) % images.length);
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightboxOpen, images.length]);
+
+  // Swipe left/right, since the corner arrow buttons sit close to the
+  // screen edge where mobile browsers often intercept taps for their own
+  // back/forward-swipe gestures.
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(delta) > 40) {
+      if (delta < 0) next();
+      else prev();
+    }
+    touchStartX.current = null;
+  }
 
   return (
     <div className="space-y-3">
@@ -64,24 +84,26 @@ export default function ProductGallery({
       {lightboxOpen && (
         <div
           onClick={() => setLightboxOpen(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-10"
         >
           <button
             onClick={() => setLightboxOpen(false)}
             aria-label="Fermer"
-            className="absolute right-4 top-4 font-mono text-xs uppercase tracking-wide text-white/70 transition hover:text-white"
+            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-lg text-white ring-1 ring-white/40 transition hover:bg-white/30"
           >
-            Fermer ✕
+            ✕
           </button>
 
           {images.length > 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setActive((i) => (i - 1 + images.length) % images.length);
+                prev();
               }}
               aria-label="Image précédente"
-              className="absolute left-2 top-1/2 -translate-y-1/2 px-3 py-6 text-2xl text-white/70 transition hover:text-white sm:left-6"
+              className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-2xl text-white ring-1 ring-white/40 transition hover:bg-white/30 sm:left-6"
             >
               ‹
             </button>
@@ -99,10 +121,10 @@ export default function ProductGallery({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setActive((i) => (i + 1) % images.length);
+                next();
               }}
               aria-label="Image suivante"
-              className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-6 text-2xl text-white/70 transition hover:text-white sm:right-6"
+              className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-2xl text-white ring-1 ring-white/40 transition hover:bg-white/30 sm:right-6"
             >
               ›
             </button>

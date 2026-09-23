@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getShopProduct } from "@/lib/shop/products";
+import { createClient } from "@/lib/supabase/server";
 import BuyForm from "@/components/shop/BuyForm";
 import ProductGallery from "@/components/shop/ProductGallery";
 
@@ -15,6 +16,11 @@ export default async function ShopProductPage({
   if (!product) {
     notFound();
   }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   return (
     <div className="py-14">
@@ -38,7 +44,7 @@ export default async function ShopProductPage({
             </h1>
           </div>
 
-          <BuyForm product={product} />
+          <BuyForm product={product} isLoggedIn={!!user} />
 
           <div className="space-y-3 border-t border-border pt-6">
             {product.description.map((paragraph) => (

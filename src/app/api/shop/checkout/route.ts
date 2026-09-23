@@ -13,20 +13,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Product not found" }, { status: 404 });
   }
 
-  const origin = new URL(request.url).origin;
-  const stripe = createStripeClient();
-
-  // Not required to buy merch, but lets signed-in buyers see the order
-  // later in their account's purchase history.
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Required (not just nudged client-side) so every order can be tied to
+  // an account and show up in that buyer's purchase history.
+  if (!user) {
+    return NextResponse.json({ error: "Sign in required" }, { status: 401 });
+  }
+
+  const origin = new URL(request.url).origin;
+  const stripe = createStripeClient();
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
-    ...(user && { client_reference_id: user.id }),
-    ...(user?.email && { customer_email: user.email }),
+    client_reference_id: user.id,
+    ...(user.email && { customer_email: user.email }),
     line_items: [
       {
         price_data: {
