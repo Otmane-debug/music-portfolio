@@ -20,6 +20,10 @@ export type ShopProduct = {
   variants: ShopVariant[];
 };
 
+function galleryFor(basePath: string) {
+  return [1, 2, 3, 4, 5, 6].map((n) => `${basePath}/photo-${n}.jpg`);
+}
+
 const MUG_UID = "mug_product_msz_11-oz_mmat_ceramic-white_cl_4-0";
 const MUG_DESCRIPTION = [
   "Ce magnifique mug en céramique est parfait pour tous les événements de la journée : un café du matin, un chocolat chaud, ou toute autre boisson chaude que tu apprécies. Le mug est d'un blanc brillant avec un bord, un intérieur et une poignée colorés. Les impressions ressortent magnifiquement avec des couleurs vives. L'impression conserve sa qualité et son éclat même après l'utilisation au micro-ondes et au lave-vaisselle.",
@@ -33,11 +37,8 @@ export const shopProducts: ShopProduct[] = [
     name: "Mug Waveform",
     tagline: "Stereo · 48 kHz · 24 bit",
     description: MUG_DESCRIPTION,
-    image: "/shop/mugs/waveform/photo-lifestyle.jpg",
-    gallery: [
-      "/shop/mugs/waveform/photo-lifestyle.jpg",
-      "/shop/mugs/waveform/photo-front.jpg",
-    ],
+    image: "/shop/mugs/waveform/photo-1.jpg",
+    gallery: galleryFor("/shop/mugs/waveform"),
     designFile: "/shop/mugs/waveform/design.png",
     shippingCents: 499,
     variants: [
@@ -50,11 +51,8 @@ export const shopProducts: ShopProduct[] = [
     name: "Mug Harmonic Ratios",
     tagline: "2:1 · 3:2 · 4:3",
     description: MUG_DESCRIPTION,
-    image: "/shop/mugs/harmonic-ratios/photo-lifestyle.jpg",
-    gallery: [
-      "/shop/mugs/harmonic-ratios/photo-lifestyle.jpg",
-      "/shop/mugs/harmonic-ratios/photo-front.jpg",
-    ],
+    image: "/shop/mugs/harmonic-ratios/photo-1.jpg",
+    gallery: galleryFor("/shop/mugs/harmonic-ratios"),
     designFile: "/shop/mugs/harmonic-ratios/design.png",
     shippingCents: 499,
     variants: [
@@ -67,11 +65,8 @@ export const shopProducts: ShopProduct[] = [
     name: "Mug Side A / Side B",
     tagline: "33 1/3 RPM · 45 RPM",
     description: MUG_DESCRIPTION,
-    image: "/shop/mugs/side-a-side-b/photo-lifestyle.jpg",
-    gallery: [
-      "/shop/mugs/side-a-side-b/photo-lifestyle.jpg",
-      "/shop/mugs/side-a-side-b/photo-front.jpg",
-    ],
+    image: "/shop/mugs/side-a-side-b/photo-1.jpg",
+    gallery: galleryFor("/shop/mugs/side-a-side-b"),
     designFile: "/shop/mugs/side-a-side-b/design.png",
     shippingCents: 499,
     variants: [
@@ -87,12 +82,8 @@ export const shopProducts: ShopProduct[] = [
       "Ce t-shirt, réputé pour sa douceur au toucher, est idéal pour l'impression DTG.",
       "Col sans couture aiguille double avec haute densité de points pour une surface d'impression plus lisse. Comprend une étiquette détachable pour un rebranding facile. Coupe tubulaire pour une torsion minimale. Disponible dans une large gamme de couleurs pour répondre à divers besoins de design.",
     ],
-    image: "/shop/tshirt/photo-front.jpg",
-    gallery: [
-      "/shop/tshirt/photo-front.jpg",
-      "/shop/tshirt/photo-model-1.jpg",
-      "/shop/tshirt/photo-model-2.jpg",
-    ],
+    image: "/shop/tshirt/photo-1.jpg",
+    gallery: galleryFor("/shop/tshirt"),
     designFile: "/shop/tshirt/design.png",
     shippingCents: 439,
     variants: [
@@ -113,12 +104,8 @@ export const shopProducts: ShopProduct[] = [
       "Un sweat à capuche épais, fabriqué à partir d'un doux mélange 50% coton et 50% polyester.",
       "Doté d'une capuche doublée avec cordon de serrage assorti. La filature à jet d'air du tissu offre une sensation de douceur et réduit le boulochage. Comprend une poche ventrale, des poignets en tricot côtelé et une ceinture montée en élasthanne.",
     ],
-    image: "/shop/hoodie-harmonic-ratios/photo-front.jpg",
-    gallery: [
-      "/shop/hoodie-harmonic-ratios/photo-front.jpg",
-      "/shop/hoodie-harmonic-ratios/photo-model-1.jpg",
-      "/shop/hoodie-harmonic-ratios/photo-model-2.jpg",
-    ],
+    image: "/shop/hoodie-harmonic-ratios/photo-1.jpg",
+    gallery: galleryFor("/shop/hoodie-harmonic-ratios"),
     designFile: "/shop/hoodie-harmonic-ratios/design.png",
     shippingCents: 699,
     variants: [
@@ -141,12 +128,8 @@ export const shopProducts: ShopProduct[] = [
       "Un sweat-shirt à capuche unisexe confortable et durable, fabriqué à partir d'un mélange de coton bio et de polyester recyclé.",
       "80% coton bio et 20% polyester recyclé. Construction à 3 fils pour plus de durabilité. Doublure brossée pour plus de chaleur et de confort. Cordon de serrage avec œillets stoppers métalliques.",
     ],
-    image: "/shop/hoodie-long-play/photo-front.jpg",
-    gallery: [
-      "/shop/hoodie-long-play/photo-front.jpg",
-      "/shop/hoodie-long-play/photo-model-1.jpg",
-      "/shop/hoodie-long-play/photo-back.jpg",
-    ],
+    image: "/shop/hoodie-long-play/photo-1.jpg",
+    gallery: galleryFor("/shop/hoodie-long-play"),
     designFile: "/shop/hoodie-long-play/design.png",
     shippingCents: 699,
     variants: [

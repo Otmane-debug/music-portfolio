@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getShopProduct } from "@/lib/shop/products";
 import BuyForm from "@/components/shop/BuyForm";
+import ProductGallery from "@/components/shop/ProductGallery";
 
 export default async function ShopProductPage({
   params,
@@ -25,33 +26,7 @@ export default async function ShopProductPage({
       </Link>
 
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
-        <div className="space-y-3">
-          <div className="aspect-square w-full overflow-hidden rounded-xl border border-border bg-background-alt">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={product.gallery[0]}
-              alt={product.name}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          {product.gallery.length > 1 && (
-            <div className="grid grid-cols-3 gap-3">
-              {product.gallery.slice(1).map((src) => (
-                <div
-                  key={src}
-                  className="aspect-square w-full overflow-hidden rounded-lg border border-border bg-background-alt"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt={product.name}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <ProductGallery images={product.gallery} alt={product.name} />
 
         <div className="space-y-6">
           <div className="space-y-2">
