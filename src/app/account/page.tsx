@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import RedownloadButton from "@/components/RedownloadButton";
 import ShopOrders from "@/components/ShopOrders";
+import ChangePasswordForm from "@/components/ChangePasswordForm";
+import DeleteAccountButton from "@/components/DeleteAccountButton";
 
 export default async function AccountPage() {
   const supabase = await createClient();
@@ -59,6 +61,16 @@ export default async function AccountPage() {
         Shop orders
       </h2>
       <ShopOrders />
+
+      <h2 className="mb-4 mt-10 font-mono text-xs uppercase tracking-[0.3em] text-foreground-dim">
+        Change password
+      </h2>
+      <ChangePasswordForm />
+
+      <h2 className="mb-4 mt-10 font-mono text-xs uppercase tracking-[0.3em] text-foreground-dim">
+        Danger zone
+      </h2>
+      <DeleteAccountButton />
     </div>
   );
 }
